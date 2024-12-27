@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Home</title>
+
+  <!-- Bootstrap 5 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+    }
+
+    .vh-100 {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .table thead {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .btn-view {
+      background-color: #17a2b8;
+      color: white;
+    }
+
+    .btn-view:hover {
+      background-color: #138496;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+    }
+
+    h4 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #343a40;
+    }
+
+    .section-table {
+      background-color: white;
+      padding: 40px 0;
+      flex-grow: 1;
+    }
+
+    .table-responsive {
+      width: 100%;
+    }
+
+    .love-message {
+      font-size: 2rem;
+      color: #343a40;
+      font-weight: 600;
+    }
+
+    .love-message i {
+      color: #dc3545;
+      font-size: 2.5rem;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+        <h1 class="love-message">
+          <i class="fas fa-heart"></i> Taste it out
+        </h1>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	        <ul class="navbar-nav ms-auto">
+	          <li class="nav-item">
+	            <a class="nav-link active" th:href="@{/admin/home}">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" th:href="@{/admin/report}">Report</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" th:href="@{/admin/user}">User</a>
+	          </li>
+	  	  <form action="#" th:action="@{/admin/logout}" method="POST" style="display: inline;">
+	  	      <li class="nav-item">
+	  	          <button type="submit" class="nav-link text-danger" style="background: none; border: none;">
+	  	              Logout
+	  	          </button>
+	  	      </li>
+	  	  </form>
+	        </ul>
+	      </div>
+    </div>
+  </nav>
+  
+  <section class="section-table vh-100" style="padding-top: 80px;">
+      <div class="container py-5">
+          <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-12">
+                  <div class="table-responsive">
+					<div th:if="${message}" class="alert alert-success">
+					    <span th:text="${message}"></span>
+					</div>
+
+					<div th:if="${Error}" class="alert alert-danger">
+					    <span th:text="${Error}"></span>
+					</div>
+
+                      <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: #343a40;">Recipe List</h4>
+                      <table class="table table-striped w-100">
+                          <thead>
+                              <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">User Name</th>
+                                  <th scope="col">Recipe Name</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!-- Loop through recipes -->
+                              <tr th:each="recipe, iterStat : ${recipes}">
+                                  <th scope="row" th:text="${iterStat.index + 1}"></th>
+                                  <!-- Display userName -->
+                                  <td th:text="${recipe.userName}"></td>
+                                  <td th:text="${recipe.recipeTitle}"></td>
+                                  <td>
+                                      <a th:href="@{/admin/recipe/details/{id}(id=${recipe.recipeId})}" class="btn btn-view btn-sm">View</a>
+									  <a th:href="@{/admin/recipe/delete/{id}(id=${recipe.recipeId})}" class="btn btn-delete btn-sm ml-2">Delete</a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <div class="footer">
+    <div class="text-white mb-3">Copyright © 2024. All rights reserved.</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

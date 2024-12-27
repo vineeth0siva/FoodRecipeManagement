@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .recipe-image {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        .ingredients-list,
+        .steps-list {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" th:text="${recipe.title}">Recipe Details</h1>
+
+        <!-- Recipe Table for Details -->
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Ingredients</th>
+                    <th class="text-center">Steps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- Displaying Recipe Title -->
+                    <td th:text="${recipe.title}" class="align-middle"></td>
+                    <!-- Displaying Recipe Image -->
+                    <td class="text-center">
+                        <img th:src="@{${recipe.imageUrl}}" alt="Recipe Image" class="recipe-image">
+                    </td>
+                    <!-- Displaying Ingredients List -->
+                    <td>
+                        <ul class="ingredients-list">
+                            <!-- Iterating through ingredients (Assuming ingredients is an array or list passed from the controller) -->
+                            <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}"></li>
+                        </ul>
+                    </td>
+                    <!-- Displaying Steps List -->
+                    <td>
+                        <ol class="steps-list">
+                            <!-- Iterating through instructions list -->
+                            <li th:each="step : ${instructions}" th:text="${step}"></li>
+                        </ol>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Button to go back to recipe list -->
+        <div class="text-center mt-4">
+            <a th:href="@{/admin/home}" class="btn btn-primary">Back to Recipe List</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

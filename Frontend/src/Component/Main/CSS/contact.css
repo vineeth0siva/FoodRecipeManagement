@@ -1,0 +1,61 @@
+/* contact.css */
+
+.contact-page {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: #ffffff; /* White card background */
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+h2 {
+    color: #343a40; /* Dark text color */
+}
+
+h3 {
+    color: #ffffff; /* White text color for contact info */
+}
+
+.form-label {
+    font-weight: bold;
+    color: #343a40; /* Dark text color */
+}
+
+.form-control {
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Blue shadow on focus */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border-color: #007bff; /* Bootstrap primary border color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3; /* Darker border color on hover */
+}
+
+.contact-info {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    padding: 2rem;
+    border-radius: 10px;
+    color: #ffffff; /* White text color */
+}
+
+.contact-info p {
+    margin: 0.5rem 0; /* Space between contact info lines */
+}
